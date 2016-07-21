@@ -1,0 +1,13 @@
+{
+	"schema_name":"Bluetooth",
+	"table_name":"users",
+	"comment":"this table will contain a list of all users for bluetooth login",
+	"annotations": {},
+	"column_definitions": [{"comment":{},"default":{},"type":{"typename":"text"},
+				"annotations":{},"name":"phone_name"},{"comment":{},"default":{},
+				"type":{"typename":"text"},"annotations":{},"name":"username"}],
+	"keys":[{"comment":{},"annotations":{},"unique_columns":["username","phone_name"]}],
+	"foreign_keys":[],
+	"kind":"table"
+}
+

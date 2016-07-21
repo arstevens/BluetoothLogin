@@ -1,0 +1,5 @@
+catalog_id: 8
+schema: Bluetooth
+table_name: users
+
+input = {"phone_name":text,"username":text}
