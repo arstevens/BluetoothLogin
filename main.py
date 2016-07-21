@@ -62,8 +62,8 @@ def main():
 	
 	username = ermrest.get_data(8,"users","/phone_name="+str(target_phone[0]))[0]['username']
 	
-	e.delete_data(7,"session_info")
-	e.put_data(7,"session_info",{"user":username,"jarvis_response":None,"current_experiment_id":None})
+	ermrest.delete_data(7,"session_info")
+	ermrest.put_data(7,"session_info",{"user":username,"jarvis_response":None,"current_experiment_id":None})
 
 	return target_phone
 
