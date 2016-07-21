@@ -15,12 +15,11 @@ def is_valid(phone_name,ermrest):
 		return True
 	return False
 
-def get_nearest_phone(filename):
+def get_nearest_phone(filename,ermrest):
 	global completed
 	snatcher = RSSI_snatcher(filename)
 	devices = bluetooth.discover_devices()	
 	nearest_phone = None
-	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")	
 	
 	for address in devices:
 		new_phone = snatcher.get_device_strength(address)
@@ -52,14 +51,20 @@ def main():
 	global completed
 	os.chdir("logs")
 
+	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")	
 	log_name = time.asctime(time.localtime(time.time())).replace(" ","_")+".log"
 	logger = open(log_name,"w")
-	print >> logger, "LOGS: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))
+	print >> logger, "LOG AT: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))
 	print >> logger, " "
 
 	while (completed == False):
-		target_phone = get_nearest_phone(logger)
+		target_phone = get_nearest_phone(logger,ermrest)
 	
+	username = ermrest.get_data(8,"users","/phone_name="+str(target_phone[0]))[0]['username']
+	
+	e.delete_data(7,"session_info")
+	e.put_data(7,"session_info",{"user":username,"jarvis_response":None,"current_experiment_id":None})
+
 	return target_phone
 
 
