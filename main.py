@@ -2,6 +2,9 @@ from RSSI_snatcher import RSSI_snatcher
 from ErmrestHandler import ErmrestHandler
 import bluetooth	
 
+#globalVariable
+completed = False
+
 def is_valid(phone_name,ermrest):
 	#checks if user is valid
 	user_data = ermrest.get_data(8,"users","/phone_name="+str(phone_name))
@@ -11,6 +14,7 @@ def is_valid(phone_name,ermrest):
 	return False
 
 def get_nearest_phone():
+	global completed
 	snatcher = RSSI_snatcher()
 	devices = bluetooth.discover_devices()	
 	nearest_phone = None
@@ -29,17 +33,24 @@ def get_nearest_phone():
 				nearest_phone = new_phone
 		else:
 			print("Phone: "+new_phone[0]+" is not registered")
-	if (nearest_phone != None):	
+	if (nearest_phone != None and nearest_phone[1] != -9999):	
 		nearest_phone = (bluetooth.lookup_name(nearest_phone[0])
 				,nearest_phone[0],nearest_phone[1])
+		completed = True
 	else:
 		nearest_phone = "No Devices Detected"
 	print("NearestPhone: "+str(nearest_phone))
 	return nearest_phone
 
 def main():
-	target_phone = get_nearest_phone()
+	global completed
 
-main()
+	while (completed == False):
+		target_phone = get_nearest_phone()
 	
-			
+	return target_phone
+
+
+if __name__ == "__main__":
+	main()
+	
