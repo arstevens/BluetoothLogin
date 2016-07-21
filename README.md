@@ -14,7 +14,7 @@ into the database where the current user for JarvisLabAssistant is held.
 ##How to use
 Set up a Raspberry Pi 3(or other rpi but you will require a bluetooth adapter) with Raspbian 
 and clone this repository to your machine. Download the dependencies below and create a logs directory.
-Set up your pi so that on launch to run bluetooth login.py scirpt will run.
+Set up your pi so that on launch it will run the script run_bluetooth_login.py scirpt will run.
 
 ##Dependencies
 pi-bluetooth
