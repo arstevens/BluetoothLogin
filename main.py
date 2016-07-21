@@ -47,6 +47,11 @@ def get_nearest_phone(filename,ermrest):
 	print >> filename, "NearestPhone: "+str(nearest_phone)
 	return nearest_phone
 
+def action(target_phone,ermrest):
+	username = ermrest.get_data(8,"users","/phone_name="+str(target_phone[0]))[0]['username']
+	ermrest.delete_data(7,"session_info")
+	ermrest.put_data(7,"session_info",{"user":username,"jarvis_response":None,"current_experiment_id":None})
+
 def main():
 	global completed
 	os.chdir("logs")
@@ -60,12 +65,7 @@ def main():
 	while (completed == False):
 		target_phone = get_nearest_phone(logger,ermrest)
 	
-	username = ermrest.get_data(8,"users","/phone_name="+str(target_phone[0]))[0]['username']
-	
-	ermrest.delete_data(7,"session_info")
-	ermrest.put_data(7,"session_info",{"user":username,"jarvis_response":None,"current_experiment_id":None})
-
-	return target_phone
+	action(target_phone,ermrest)
 
 
 if __name__ == "__main__":
