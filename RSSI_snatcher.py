@@ -7,14 +7,17 @@ from numpy import median
 
 class RSSI_snatcher(object):
 
-	def __init__(self):
+	def __init__(self,filename):
 		self.RSSI_values = None	
 		self._address = None
+		self.f = filename
 
 	def _printpacket(self,pkt):
 		for c in pkt:
 			sys.stdout.write("%02x " % struct.unpack("B",c)[0])
+			print >> self.f, "%02x " % struct.unpack("B",c)[0]
 		print() 
+		print >> self.f, " "
 	
 	def _get_median(self,dataset):
 		#dataset must be list of tuples with value 0 being address and value 1 being rssi
@@ -122,12 +125,14 @@ class RSSI_snatcher(object):
 						bluetooth.get_byte(pkt[1+13*nrsp+i]))
 					results.append( ( addr, rssi ) )
 					print("[%s] RSSI: [%d]" % (addr, rssi))
+					print >> self.f, "[%s] RSSI: [%d]" % (addr,rssi)
 			elif event == bluez.EVT_INQUIRY_COMPLETE:
 				done = True
 			elif event == bluez.EVT_CMD_STATUS:
 				status, ncmd, opcode = struct.unpack("BBH", pkt[3:7])
 				if status != 0:
 					print("uh oh...")
+					print >> self.f, "uh oh..."
 					self._printpacket(pkt[3:7])
 					done = True
 			elif event == bluez.EVT_INQUIRY_RESULT:
@@ -136,10 +141,13 @@ class RSSI_snatcher(object):
 				for i in range(nrsp):
 					addr = bluez.ba2str( pkt[1+6*i:1+6*i+6] )
 					results.append( ( addr, -1 ) )
-					print("[%s] (no RRSI)" % addr)
+					print("[%s] (no RSSI)" % addr)
+					print >> self.f, "[%s] (no RSSI)" % addr
 			else:
 				print("unrecognized packet type 0x%02x" % ptype)
+				print >> self.f, "unrecognized packet type 0x%02x" % ptype
 				print("event ", event)
+				print >> self.f, "event "+str(event)
 
 
 		# restore old filter
@@ -156,27 +164,37 @@ class RSSI_snatcher(object):
 			sock = bluez.hci_open_dev(dev_id)
 		except:
 			print("error accessing bluetooth device...")
+			print >> self.f, "error accessing bluetooth device..."
 			sys.exit(1)
 		try:
 			mode = self._read_inquiry_mode(sock)
 		except Exception as e:
 			print("error reading inquiry mode.  ")
+			print >> self.f, "error reading inquiry mode."
 			print("Are you sure this a bluetooth 1.2 device?")
+			print >> self.f, "Are you sure this is a bluetooth 1.2 device?"
 			print(e)
+			print >> self.f, str(e)
 			sys.exit(1)
 		print("current inquiry mode is %d" % mode)
+		print >> self.f, "current inquiry mode is %d" % mode
 		
 		if mode != 1:
 			print("writing inquiry mode...")
+			print >> self.f, "writing inquiry mode..."
 			try:
 				result = self._write_inquiry_mode(sock, 1)
 			except Exception as e:
 				print("error writing inquiry mode.  Are you sure you're root?")
+				print >> self.f, "error writing inquiry mode. Are you sure you're root?"
 				print(e)
+				print >> self.f, str(e)
 				sys.exit(1)
 			if result != 0:
 				print("error while setting inquiry mode")
+				print >> self.f, "error while setting inquiry mode"
 			print("result: %d" % result)
+			print >> self.f, "result: %d" % result
 		
 		self.RSSI_values = self._device_inquiry_with_with_rssi(sock)
 		return (bluetooth_address,self._get_median(self.RSSI_values))
