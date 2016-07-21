@@ -1,6 +1,9 @@
 # BluetoothLogin
 _Because your just that lazy!_
-Gets strongest connection and logs into Jarvis
+
+##What it is
+BluetoothLoging is a tool that allows you to log into the JarvisLabAssistant Alexa skill with just your phone and a bluetooth connection. 
+This can be ported to work with other programs. All you need to do is change the action function
 
 ##How it works
 This program works by scanning the network for open bluetooth devices and 
