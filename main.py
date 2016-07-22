@@ -1,73 +1,51 @@
-from RSSI_snatcher import RSSI_snatcher
+from Phone_retriever import Phone_retriever
 from ErmrestHandler import ErmrestHandler
-import bluetooth	
+import pyvona
 import time
-import os
 
-#globalVariable
-completed = False
 
-def is_valid(phone_name,ermrest):
-	#checks if user is valid
-	user_data = ermrest.get_data(8,"users","/phone_name="+str(phone_name))
+def introduce(voice,username):
+	voice.speak("Hello "+username+", Your session has begun")
 
-	if user_data:
+def is_user(ermrest):
+	data = ermrest.get_data(7,"session_info")
+
+	if (data):
 		return True
 	return False
 
-def get_nearest_phone(filename,ermrest):
-	global completed
-	snatcher = RSSI_snatcher(filename)
-	devices = bluetooth.discover_devices()	
-	nearest_phone = None
-	
-	for address in devices:
-		new_phone = snatcher.get_device_strength(address)
-		new_phone_name = bluetooth.lookup_name(address)
-		print("NewPhone: "+str(new_phone))
-		print >> filename, "NewPhone: "+str(new_phone)
-
-		if is_valid(new_phone_name,ermrest):
-			print("Phone: "+new_phone[0]+" is registered")
-			print >> filename, "Phone: "+new_phone[0]+" is registered"
-			if nearest_phone == None:
-				nearest_phone = new_phone
-			elif new_phone[1] >= nearest_phone[1]:
-				nearest_phone = new_phone
-		else:
-			print("Phone: "+new_phone[0]+" is not registered")
-			print >> filename, "Phone: "+new_phone[0]+" is not registered"
-	if (nearest_phone != None and nearest_phone[1] != -9999):	
-		nearest_phone = (bluetooth.lookup_name(nearest_phone[0])
-				,nearest_phone[0],nearest_phone[1])
-		completed = True
-	else:
-		nearest_phone = "No Devices Detected"
-	print("NearestPhone: "+str(nearest_phone))
-	print >> filename, "NearestPhone: "+str(nearest_phone)
-	return nearest_phone
-
-def action(target_phone,ermrest):
-	username = ermrest.get_data(8,"users","/phone_name="+str(target_phone[0]))[0]['username']
-	ermrest.delete_data(7,"session_info")
-	ermrest.put_data(7,"session_info",{"user":username,"jarvis_response":None,"current_experiment_id":None})
+def action(phone,voice,ermrest):
+	try:
+		user_info = ermrest.get_data(8,"users","/phone_name="+str(phone[0]))[0]
+		data = {"user":user_info['username'],"jarvis_response":None,"current_experiment_id":None}
+		try:
+			ermrest.delete_data(7,"session_info")
+		except:
+			print("No data in session info")
+		ermrest.put_data(7,"session_info",data)
+		introduce(voice,str(user_info['username']))
+	except Exception as exc:
+		print("[*] Error: "+str(exc))
+		
 
 def main():
-	global completed
-	os.chdir("logs")
+	voice = pyvona.create_voice("GDNAJEKX2JVOZI4P5I5Q","L5nzNM9ZG8RgDOFBIQG2cnJohk21MVvkSlJzGPaj")
+	voice.voice_name = 'Salli'
+	phone_retriever = Phone_retriever()
+	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
+	timer = time.time()
 
-	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")	
-	log_name = time.asctime(time.localtime(time.time())).replace(" ","_")+".log"
-	logger = open(log_name,"w")
-	print >> logger, "LOG AT: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))
-	print >> logger, " "
-
-	while (completed == False):
-		target_phone = get_nearest_phone(logger,ermrest)
-	
-	action(target_phone,ermrest)
-
+	while True:
+		if (time.time()-timer > 10):
+			if (is_user(ermrest)):
+				timer = time.time()
+				continue
+			else:
+				timer = time.time()
+				nearest_phone = phone_retriever.get_nearest_phone()
+				action(nearest_phone,voice,ermrest)
 
 if __name__ == "__main__":
 	main()
-	
+			
+		

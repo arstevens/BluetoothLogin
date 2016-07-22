@@ -1,0 +1,55 @@
+LOG AT: Fri_Jul_22_09:47:40_2016
+ 
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-66]
+[00:1F:F3:B4:AB:4B] RSSI: [-68]
+[00:1F:F3:B4:AB:4B] RSSI: [-65]
+NewPhone: ('00:1F:F3:B4:AB:4B', -66.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-64]
+NewPhone: ('00:1F:F3:B4:AB:4B', -64.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-70]
+[00:1F:F3:B4:AB:4B] RSSI: [-70]
+[00:1F:F3:B4:AB:4B] RSSI: [-81]
+[00:1F:F3:B4:AB:4B] RSSI: [-72]
+NewPhone: ('00:1F:F3:B4:AB:4B', -71.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[90:E7:C4:3E:D1:0C] RSSI: [-43]
+[00:1F:F3:B4:AB:4B] RSSI: [-72]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[90:E7:C4:3E:D1:0C] RSSI: [-43]
+[90:E7:C4:3E:D1:0C] RSSI: [-49]
+[90:E7:C4:3E:D1:0C] RSSI: [-43]
+[90:E7:C4:3E:D1:0C] RSSI: [-50]
+[90:E7:C4:3E:D1:0C] RSSI: [-49]
+NewPhone: ('00:1F:F3:B4:AB:4B', -72.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+current inquiry mode is 1
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[00:1F:F3:B4:AB:4B] RSSI: [-91]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[00:1F:F3:B4:AB:4B] RSSI: [-68]
+[90:E7:C4:3E:D1:0C] RSSI: [-40]
+[00:1F:F3:B4:AB:4B] RSSI: [-77]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[58:B0:35:81:CE:47] RSSI: [-88]
+[58:B0:35:81:CE:47] RSSI: [-88]
+[58:B0:35:81:CE:47] RSSI: [-89]
+[90:E7:C4:3E:D1:0C] RSSI: [-42]
+[90:E7:C4:3E:D1:0C] RSSI: [-50]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[90:E7:C4:3E:D1:0C] RSSI: [-49]
+[90:E7:C4:3E:D1:0C] RSSI: [-43]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+NewPhone: ('90:E7:C4:3E:D1:0C', -44.0)
+Phone: 90:E7:C4:3E:D1:0C is registered
+NearestPhone: ('aleksphone', '90:E7:C4:3E:D1:0C', -44.0)

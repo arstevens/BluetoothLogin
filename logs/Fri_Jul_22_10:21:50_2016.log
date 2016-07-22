@@ -1,0 +1,32 @@
+LOG AT: Fri_Jul_22_10:21:50_2016
+ 
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-70]
+[00:1F:F3:B4:AB:4B] RSSI: [-72]
+[00:1F:F3:B4:AB:4B] RSSI: [-68]
+[00:1F:F3:B4:AB:4B] RSSI: [-65]
+NewPhone: ('00:1F:F3:B4:AB:4B', -69.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-66]
+[00:1F:F3:B4:AB:4B] RSSI: [-69]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+[90:E7:C4:3E:D1:0C] RSSI: [-41]
+[90:E7:C4:3E:D1:0C] RSSI: [-45]
+[90:E7:C4:3E:D1:0C] RSSI: [-41]
+[00:1F:F3:B4:AB:4B] RSSI: [-70]
+[00:1F:F3:B4:AB:4B] RSSI: [-69]
+[00:1F:F3:B4:AB:4B] RSSI: [-72]
+[90:E7:C4:3E:D1:0C] RSSI: [-42]
+[90:E7:C4:3E:D1:0C] RSSI: [-40]
+[90:E7:C4:3E:D1:0C] RSSI: [-44]
+NewPhone: ('90:E7:C4:3E:D1:0C', -42.0)
+Phone: 90:E7:C4:3E:D1:0C is registered
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-68]
+[00:1F:F3:B4:AB:4B] RSSI: [-80]
+[00:1F:F3:B4:AB:4B] RSSI: [-79]
+NewPhone: ('00:1F:F3:B4:AB:4B', -79.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: ('aleksphone', '90:E7:C4:3E:D1:0C', -42.0)

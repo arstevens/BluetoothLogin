@@ -1,0 +1,6 @@
+LOG AT: Fri_Jul_22_09:45:12_2016
+ 
+current inquiry mode is 2
+writing inquiry mode...
+error writing inquiry mode. Are you sure you're root?
+(1, 'Operation not permitted')
