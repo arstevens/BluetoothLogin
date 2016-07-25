@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from Phone_retriever import Phone_retriever
 from ErmrestHandler import ErmrestHandler
 import time
