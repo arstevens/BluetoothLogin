@@ -92,7 +92,7 @@ class RSSI_snatcher(object):
 		if status != 0: return -1
 		return 0
 
-	def _device_inquiry_with_with_rssi(self,sock):
+	def _device_inquiry_with_rssi(self,sock):
 		# save current filter
 		old_filter = sock.getsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, 14)
 		
@@ -196,6 +196,6 @@ class RSSI_snatcher(object):
 			print("result: %d" % result)
 			print >> self.f, "result: %d" % result
 		
-		self.RSSI_values = self._device_inquiry_with_with_rssi(sock)
+		self.RSSI_values = self._device_inquiry_with_rssi(sock)
 		return (bluetooth_address,self._get_median(self.RSSI_values))
 

@@ -4,9 +4,6 @@ import pyvona
 import time
 
 
-def introduce(voice,username):
-	voice.speak("Hello "+username+", Your session has begun")
-
 def is_user(ermrest):
 	data = ermrest.get_data(7,"session_info")
 
@@ -14,7 +11,7 @@ def is_user(ermrest):
 		return True
 	return False
 
-def action(phone,voice,ermrest):
+def action(phone,ermrest):
 	try:
 		user_info = ermrest.get_data(8,"users","/phone_name="+str(phone[0]))[0]
 		data = {"user":user_info['username'],"jarvis_response":None,"current_experiment_id":None}
@@ -23,14 +20,11 @@ def action(phone,voice,ermrest):
 		except:
 			print("No data in session info")
 		ermrest.put_data(7,"session_info",data)
-		introduce(voice,str(user_info['username']))
 	except Exception as exc:
 		print("[*] Error: "+str(exc))
 		
 
 def main():
-	voice = pyvona.create_voice("GDNAJEKX2JVOZI4P5I5Q","L5nzNM9ZG8RgDOFBIQG2cnJohk21MVvkSlJzGPaj")
-	voice.voice_name = 'Salli'
 	phone_retriever = Phone_retriever()
 	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
 	timer = time.time()
@@ -43,7 +37,7 @@ def main():
 			else:
 				timer = time.time()
 				nearest_phone = phone_retriever.get_nearest_phone()
-				action(nearest_phone,voice,ermrest)
+				action(nearest_phone,ermrest)
 
 if __name__ == "__main__":
 	main()

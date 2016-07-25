@@ -18,5 +18,4 @@ Set up your pi so that on launch it will run the script run_bluetooth_login.py s
 
 ##Dependencies
 pi-bluetooth,
-pyvona(Ivona account required),
 PyBluez,
