@@ -1,6 +1,5 @@
 from Phone_retriever import Phone_retriever
 from ErmrestHandler import ErmrestHandler
-import pyvona
 import time
 
 
