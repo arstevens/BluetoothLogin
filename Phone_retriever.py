@@ -15,7 +15,10 @@ class Phone_retriever:
 
 	def is_valid(self,phone_name):
 		#checks if user is valid
-		user_data = self.ermrest.get_data(8,"users","/phone_name="+str(phone_name))
+		try:
+			user_data = self.ermrest.get_data(8,"users","/phone_name="+str(phone_name))
+		except:
+			user_data = None
 
 		if user_data:
 			return True
@@ -56,7 +59,8 @@ class Phone_retriever:
 		return nearest_phone
 
 	def _init_logger(self):
-		os.chdir("/home/pi/main/BluetoothLogin/logs")
+		#os.chdir("/home/pi/main/BluetoothLogin/logs")
+		os.chdir("logs")
 		log_name = time.asctime(time.localtime(time.time())).replace(" ","_")+".log"
 		logger = open(log_name,"w")
 		print >> logger, "LOG AT: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))
