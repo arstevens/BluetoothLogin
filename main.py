@@ -4,49 +4,39 @@ from ErmrestHandler import ErmrestHandler
 import bluetooth
 import time
 
-
 def is_user(ermrest):
-	data = ermrest.get_data(7,"session_info")
+        data = ermrest.get_data(7,"session_info")
 
-	if (data):
-		return True
-	return False
+        if (data):
+                return True
+        return False
 
 def action(phone,ermrest):
-	try:
-		user_info = ermrest.get_data(8,"users","/phone_name="+str(phone[0]))[0]
-		data = {"user":user_info['username'],"jarvis_response":None,"current_experiment_id":None}
-		try:
-			ermrest.delete_data(7,"session_info")
-		except:
-			print("No data in session info")
-		ermrest.put_data(7,"session_info",data)
-		return True
-		
-	except:
-		return False
+        try:
+                user_info = ermrest.get_data(8,"users","/phone_name="+str(phone[0]))[0]
+                data = {"user":user_info['username'],"jarvis_response":None,"current_experiment_id":None}
+                try:
+                        ermrest.delete_data(7,"session_info")
+                except:
+                        print("No data in session info")
+                ermrest.put_data(7,"session_info",data)
+                return True
+                
+        except:
+                return False
 
 def check_user_exists(ermrest):
-	exists = False
 	devices = bluetooth.discover_devices()
 	device_names = [bluetooth.lookup_name(mac) for mac in devices]
-        print(device_names)
-	users = ermrest.get_data(8,"users")
-	current_user = ermrest.get_data(7,"session_info")[0]['user']
 
-	for device_name in device_names:
-		for user in users:
-			try:
-				username = user[device_name]
-			except:
-				username = None
-			if username == current_user:
-				exists = True
-				break
-		if (exists):
-			break
-	
-	return exists
+	current_user = ermrest.get_data(7,"session_info")[0]['user']	
+	user_info = ermrest.get_data(8,"users","/username="+current_user)[0]
+	phone_name = bluetooth.lookup_name(user_info['phone_name'])
+
+	if phone_name in device_names:
+		return True
+	return False
+ 
 
 
 def main():
@@ -72,9 +62,9 @@ def main():
 			if(action(nearest_phone,ermrest)):
 				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
 				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
-	
+
 
 if __name__ == "__main__":
-	main()
-			
-		
+	main() 
+                        
+                

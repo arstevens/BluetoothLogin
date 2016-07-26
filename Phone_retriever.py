@@ -40,7 +40,7 @@ class Phone_retriever:
 				if self.is_valid(new_phone_name):
 					print("Phone: "+new_phone[0]+" is registered")
 					print >> self.logger, "Phone: "+new_phone[0]+" is registered"
-					if nearest_phone == None:
+					if None in nearest_phone: 
 						nearest_phone = new_phone
 					elif new_phone[1] >= nearest_phone[1]:
 						nearest_phone = new_phone
