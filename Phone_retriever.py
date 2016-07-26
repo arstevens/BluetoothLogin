@@ -29,7 +29,7 @@ class Phone_retriever:
 		while (self.completed == False or nearest_phone == None):
 			snatcher = RSSI_snatcher(self.logger)
 			devices = bluetooth.discover_devices()	
-			nearest_phone = None
+			nearest_phone = (None,None) 
 			
 			for address in devices:
 				new_phone = snatcher.get_device_strength(address)
