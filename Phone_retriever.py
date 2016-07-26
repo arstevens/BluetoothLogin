@@ -26,7 +26,7 @@ class Phone_retriever:
 
 	def get_nearest_phone(self):
 		nearest_phone = None
-		while (self.completed == False or nearest_phone == None):
+		while (self.completed == False or None in nearest_phone): 
 			snatcher = RSSI_snatcher(self.logger)
 			devices = bluetooth.discover_devices()	
 			nearest_phone = (None,None) 
