@@ -55,7 +55,7 @@ def main():
 	timer = time.time()
 
 	while True:
-		if (time.time()-timer > 5):
+		if (time.time()-timer > 8):
 			devices = bluetooth.discover_devices()
 			users = ermrest.get_data(8,"users")[0]
 			#checks if user is logged in AND if the user is still in the area.
