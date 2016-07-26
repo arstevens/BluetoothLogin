@@ -59,8 +59,7 @@ class Phone_retriever:
 		return nearest_phone
 
 	def _init_logger(self):
-		#os.chdir("/home/pi/main/BluetoothLogin/logs")
-		os.chdir("logs")
+		os.chdir("/home/pi/main/BluetoothLogin/logs")
 		log_name = time.asctime(time.localtime(time.time())).replace(" ","_")+".log"
 		logger = open(log_name,"w")
 		print >> logger, "LOG AT: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))
