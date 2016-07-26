@@ -31,7 +31,7 @@ def check_user_exists(ermrest):
 
 	current_user = ermrest.get_data(7,"session_info")[0]['user']	
 	user_info = ermrest.get_data(8,"users","/username="+current_user)[0]
-	phone_name = bluetooth.lookup_name(user_info['phone_name'])
+	phone_name = user_info['phone_name']
 
 	if phone_name in device_names:
 		return True
