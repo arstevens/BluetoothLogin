@@ -21,9 +21,9 @@ def action(phone,ermrest):
 		except:
 			print("No data in session info")
 		ermrest.put_data(7,"session_info",data)
-	except Exception as exc:
-		print("[*] Error: "+str(exc))
 		
+	except:
+		pass
 
 def check_user_exists(ermrest):
 	exists = False
@@ -49,6 +49,7 @@ def check_user_exists(ermrest):
 
 def main():
 	phone_retriever = Phone_retriever()
+	logger = phone_retriever.logger
 	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
 	timer = time.time()
 
@@ -66,6 +67,8 @@ def main():
 
 			timer = time.time()
 			nearest_phone = phone_retriever.get_nearest_phone()
+			print("User log in at: "+time.asctime(time.localtime(time.time()))) 
+			print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
 			action(nearest_phone,ermrest)
 
 if __name__ == "__main__":
