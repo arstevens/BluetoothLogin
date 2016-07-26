@@ -62,6 +62,7 @@ def main():
 						ermrest.delete_data(7,"session_info")
 					else:
 						fail_counter += 1
+					timer = time.time()
 
 			timer = time.time()
 			nearest_phone = phone_retriever.get_nearest_phone()
