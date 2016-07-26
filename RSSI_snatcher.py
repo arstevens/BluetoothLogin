@@ -30,7 +30,7 @@ class RSSI_snatcher(object):
 			for value in odd_values:
 				dataset.remove(value)
 		if len(dataset) == 0:
-			med = -9999
+			med = -90
 		else:
 			rssis = [pair[1] for pair in dataset]
 			med = median(rssis)

@@ -47,7 +47,7 @@ class Phone_retriever:
 				else:
 					print("Phone: "+new_phone[0]+" is not registered")
 					print >> self.logger, "Phone: "+new_phone[0]+" is not registered"
-			if (nearest_phone != None and nearest_phone[1] != -9999):	
+			if (None not in nearest_phone):
 				nearest_phone = (bluetooth.lookup_name(nearest_phone[0])
 						,nearest_phone[0],nearest_phone[1])
 				self.completed = True
