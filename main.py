@@ -44,6 +44,7 @@ def main():
 	logger = phone_retriever.logger
 	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
 	timer = time.time()
+	reset_timer = time.time()
 
 	while True:
 		if (time.time()-timer > 8):
@@ -62,6 +63,12 @@ def main():
 			if(action(nearest_phone,ermrest)):
 				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
 				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
+				phone_retriever.completed = False
+		if (time.time()-reset_timer > 600):
+			phone_retriever.reset()
+			ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
+			reset_timer = time.time()
+			
 
 
 if __name__ == "__main__":

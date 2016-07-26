@@ -12,6 +12,8 @@ class Phone_retriever:
 		self.logger = self._init_logger()
 		self.ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")	
 
+	def reset(self):
+		self.ermrest = Ermresthandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
 
 	def is_valid(self,phone_name):
 		#checks if user is valid
@@ -52,6 +54,7 @@ class Phone_retriever:
 						,nearest_phone[0],nearest_phone[1])
 				self.completed = True
 			else:
+				self.completed = False
 				nearest_phone = "No Devices Detected"
 			print("NearestPhone: "+str(nearest_phone))
 			print >> self.logger, "NearestPhone: "+str(nearest_phone)
