@@ -30,6 +30,7 @@ def check_user_exists(ermrest):
 	exists = False
 	devices = bluetooth.discover_devices()
 	device_names = [bluetooth.lookup_name(mac) for mac in devices]
+        print(device_names)
 	users = ermrest.get_data(8,"users")
 	current_user = ermrest.get_data(7,"session_info")[0]['user']
 
