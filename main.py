@@ -43,6 +43,7 @@ def main():
 	phone_retriever = Phone_retriever()
 	logger = phone_retriever.logger
 	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
+	fail_counter = 0
 	timer = time.time()
 	reset_timer = time.time()
 
@@ -54,9 +55,13 @@ def main():
 			if (is_user(ermrest)):
 				if (check_user_exists(ermrest)):
 					timer = time.time()
+					fail_counter = 0
 					continue
 				else:
-					ermrest.delete_data(7,"session_info")
+					if (fail_counter == 2):
+						ermrest.delete_data(7,"session_info")
+					else:
+						fail_counter += 1
 
 			timer = time.time()
 			nearest_phone = phone_retriever.get_nearest_phone()
