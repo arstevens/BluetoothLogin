@@ -21,9 +21,10 @@ def action(phone,ermrest):
 		except:
 			print("No data in session info")
 		ermrest.put_data(7,"session_info",data)
+		return True
 		
 	except:
-		pass
+		return False
 
 def check_user_exists(ermrest):
 	exists = False
@@ -67,9 +68,10 @@ def main():
 
 			timer = time.time()
 			nearest_phone = phone_retriever.get_nearest_phone()
-			print("User log in at: "+time.asctime(time.localtime(time.time()))) 
-			print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
-			action(nearest_phone,ermrest)
+			if(action(nearest_phone,ermrest)):
+				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
+				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
+	
 
 if __name__ == "__main__":
 	main()
