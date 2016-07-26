@@ -17,10 +17,15 @@ and clone this repository to your machine. Download the dependencies below and c
 Set up your pi so that on launch it will run the script run_bluetooth_login.py scirpt will run.
 
 -Scripts:
+
 To set up the BluetoothLogin program for yourself you must do two things.
+
 	1.) Change the action function in the main.py file to carry out the action you want.
+
 	2.) Change the host address for the ErmrestHandler and create your own catalogs and tables.
 
 ##Dependencies
+
 pi-bluetooth,
-PyBluez,
+
+PyBluez
