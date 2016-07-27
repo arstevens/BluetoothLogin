@@ -50,6 +50,7 @@ def check_user_exists(ermrest):
 
 
 def main():
+	empty_table = {"user":None,"jarvis_response":None,"current_experiment_id":None}
 	phone_retriever = Phone_retriever()
 	logger = phone_retriever.logger
 	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
@@ -72,6 +73,7 @@ def main():
 				else: #leeway for some signal drops
 					if (fail_counter >= 2):
 						ermrest.delete_data(7,"session_info")
+						ermrest.put_data(7,"session_info",empty_table)
 						print("User log out at: "+time.asctime(time.localtime(time.time())))
 						print >> logger,"User log out at: "+time.asctime(time.localtime(time.time()))
 						continue
