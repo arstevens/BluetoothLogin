@@ -4,7 +4,6 @@ import bluetooth
 import time
 import os
 
-#globalVariable
 class Phone_retriever:
 
 	def __init__(self):
@@ -15,13 +14,14 @@ class Phone_retriever:
 	def reset(self):
 		self.ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
 
-	def is_valid(self,mac):
+	def is_valid(self,phone):
 		#checks if user is valid
 		
 		valid_users = self.ermrest.get_data(8,"users")
+		phone_name = str(bluetooth.lookup_name(phone[0]))
 		
 		for usr in valid_users:
-			if usr['mac'] == mac:
+			if (usr['phone_identification'] == phone[0] or usr['phone_identification'] == phone_name):
 				return True
 		return False
 
@@ -37,7 +37,7 @@ class Phone_retriever:
 				print("NewPhone: "+str(new_phone))
 				print >> self.logger, "NewPhone: "+str(new_phone)
 
-				if self.is_valid(new_phone[0]):
+				if self.is_valid(new_phone):
 					print("Phone: "+new_phone[0]+" is registered")
 					print >> self.logger, "Phone: "+new_phone[0]+" is registered"
 					if nearest_phone == None: 

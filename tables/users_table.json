@@ -4,9 +4,9 @@
 	"comment":"this table will contain a list of all users for bluetooth login",
 	"annotations": {},
 	"column_definitions": [{"comment":{},"default":{},"type":{"typename":"text"},
-				"annotations":{},"name":"mac"},{"comment":{},"default":{},
+				"annotations":{},"name":"phone_identification"},{"comment":{},"default":{},
 				"type":{"typename":"text"},"annotations":{},"name":"username"}],
-	"keys":[{"comment":{},"annotations":{},"unique_columns":["username","mac"]}],
+	"keys":[{"comment":{},"annotations":{},"unique_columns":["username","phone_identification"]}],
 	"foreign_keys":[],
 	"kind":"table"
 }
