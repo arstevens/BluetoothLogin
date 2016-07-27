@@ -7,7 +7,7 @@ import time
 def is_user(ermrest):
         data = ermrest.get_data(7,"session_info")
 
-        if (data):
+        if (len(data) > 0):
                 return True
         return False
 
