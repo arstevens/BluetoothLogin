@@ -15,41 +15,39 @@ class Phone_retriever:
 	def reset(self):
 		self.ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
 
-	def is_valid(self,phone_name):
+	def is_valid(self,mac):
 		#checks if user is valid
-		try:
-			user_data = self.ermrest.get_data(8,"users","/phone_name="+str(phone_name))
-		except:
-			user_data = None
-
-		if user_data:
-			return True
+		
+		valid_users = self.ermrest.get_data(8,"users")
+		
+		for usr in valid_users:
+			if usr['mac'] == mac:
+				return True
 		return False
 
 	def get_nearest_phone(self):
-		nearest_phone = (None,None)
+		nearest_phone = None
 		while (self.completed == False):
 			snatcher = RSSI_snatcher(self.logger)
 			devices = bluetooth.discover_devices()	
-			nearest_phone = (None,None) 
+			nearest_phone = None 
 			
 			for address in devices:
 				new_phone = snatcher.get_device_strength(address)
-				new_phone_name = bluetooth.lookup_name(address)
 				print("NewPhone: "+str(new_phone))
 				print >> self.logger, "NewPhone: "+str(new_phone)
 
-				if self.is_valid(new_phone_name):
+				if self.is_valid(new_phone[0]):
 					print("Phone: "+new_phone[0]+" is registered")
 					print >> self.logger, "Phone: "+new_phone[0]+" is registered"
-					if None in nearest_phone: 
+					if nearest_phone == None: 
 						nearest_phone = new_phone
 					elif new_phone[1] >= nearest_phone[1]:
 						nearest_phone = new_phone
 				else:
 					print("Phone: "+new_phone[0]+" is not registered")
 					print >> self.logger, "Phone: "+new_phone[0]+" is not registered"
-			if (None not in nearest_phone):
+			if nearest_phone != None: 
 				nearest_phone = (bluetooth.lookup_name(nearest_phone[0])
 						,nearest_phone[0],nearest_phone[1])
 				self.completed = True
@@ -58,11 +56,11 @@ class Phone_retriever:
 				nearest_phone = "No Devices Detected"
 			print("NearestPhone: "+str(nearest_phone))
 			print >> self.logger, "NearestPhone: "+str(nearest_phone)
-		print("np: ",nearest_phone)
 		return nearest_phone
 
 	def _init_logger(self):
-		os.chdir("/home/pi/main/BluetoothLogin/logs")
+#		os.chdir("/home/pi/main/BluetoothLogin/logs")
+		os.chdir("logs")
 		log_name = time.asctime(time.localtime(time.time())).replace(" ","_")+".log"
 		logger = open(log_name,"w")
 		print >> logger, "LOG AT: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))

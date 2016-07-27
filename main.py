@@ -13,7 +13,12 @@ def is_user(ermrest):
 
 def action(phone,ermrest):
         try:
-                user_info = ermrest.get_data(8,"users","/phone_name="+str(phone[0]))[0]
+                users = ermrest.get_data(8,"users")
+		user_info = None
+		for user in users:
+			if user['mac'] == phone[1]:
+				user_info = user
+
                 data = {"user":user_info['username'],"jarvis_response":None,"current_experiment_id":None}
                 try:
                         ermrest.delete_data(7,"session_info")
@@ -27,13 +32,12 @@ def action(phone,ermrest):
 
 def check_user_exists(ermrest):
 	devices = bluetooth.discover_devices()
-	device_names = [bluetooth.lookup_name(mac) for mac in devices]
 
 	current_user = ermrest.get_data(7,"session_info")[0]['user']	
 	user_info = ermrest.get_data(8,"users","/username="+current_user)[0]
-	phone_name = user_info['phone_name']
+	phone = user_info['mac']
 
-	if phone_name in device_names:
+	if phone in devices:
 		return True
 	return False
  
@@ -66,6 +70,7 @@ def main():
 
 			timer = time.time()
 			nearest_phone = phone_retriever.get_nearest_phone()
+			print("NP: "+str(nearest_phone))
 			if(action(nearest_phone,ermrest)):
 				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
 				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
