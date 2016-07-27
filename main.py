@@ -5,9 +5,12 @@ import bluetooth
 import time
 
 def is_user(ermrest):
-        data = ermrest.get_data(7,"session_info")
+	try:
+        	data = ermrest.get_data(7,"session_info")[0]
+	except:
+		data = {"user":None,"jarvis_response":None,"current_experiment_id":None}
 
-        if (len(data) > 0):
+        if (data['user'] != None):
                 return True
         return False
 
