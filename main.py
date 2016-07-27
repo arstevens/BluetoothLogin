@@ -53,9 +53,11 @@ def main():
 	fail_counter = 0
 	timer = time.time()
 	reset_timer = time.time()
+	bootup_run = True
+	run_interval = 8
 
-	while True:
-		if (time.time()-timer > 8):
+	while True: #main loop
+		if (time.time()-timer > run_interval): #checks when to run so it isn't constantly running
 			devices = bluetooth.discover_devices()
 			users = ermrest.get_data(8,"users")[0]
 			#checks if user is logged in AND if the user is still in the area.
@@ -64,25 +66,29 @@ def main():
 					timer = time.time()
 					fail_counter = 0
 					continue
-				else:
-					if (fail_counter == 2):
+				else: #leeway for some signal drops
+					if (fail_counter >= 2):
 						ermrest.delete_data(7,"session_info")
+						print("User log out at: "+time.asctime(time.localtime(time.time())))
+						print >> logger,"User log out at: "+time.asctime(time.localtime(time.time()))
+						continue
 					else:
 						fail_counter += 1
+						continue
 					timer = time.time()
 
-			try:
-				ermrest.delete_data(7,"session_info")
-			except:
-				pass
 			timer = time.time()
 			nearest_phone = phone_retriever.get_nearest_phone()
-			print("NP: "+str(nearest_phone))
+
 			if(action(nearest_phone,ermrest)):
 				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
 				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
 				phone_retriever.completed = False
-		if (time.time()-reset_timer > 600):
+			if (bootup_run):
+				run_interval = 5
+				bootup_run = False
+
+		if (time.time()-reset_timer > 600): # reset some cookies so connection doesn't become invalid
 			phone_retriever.reset()
 			ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
 			reset_timer = time.time()
