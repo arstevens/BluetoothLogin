@@ -61,7 +61,7 @@ def main():
 	timer = time.time()
 	reset_timer = time.time()
 	bootup_run = True
-	logged_in = True
+	logged_in = False 
 	run_interval = 8
 
 	while True: #main loop
