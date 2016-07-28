@@ -70,6 +70,11 @@ def main():
 			users = ermrest.get_data(8,"users")[0]
 			#checks if user is logged in AND if the user is still in the area.
 			if (is_user(ermrest)):
+				if (logged_in == False):
+					print("User log in at: "+time.asctime(time.localtime(time.time()))) 
+					print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
+					logged_in = True
+				
 				if (check_user_exists(ermrest)):
 					timer = time.time()
 					fail_counter = 0
