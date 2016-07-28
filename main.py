@@ -88,6 +88,11 @@ def main():
 			if(action(nearest_phone,ermrest)):
 				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
 				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
+				try:
+					ermrest.delete_data(7,"step_completed")
+				except:
+					pass
+				ermrest.put_data(7,"step_completed",{"completed_step":None})
 			if (bootup_run):
 				run_interval = 5
 				bootup_run = False
