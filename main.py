@@ -62,6 +62,7 @@ def main():
 	reset_timer = time.time()
 	bootup_run = True
 	logged_in = False 
+	user = ""
 	run_interval = 8
 
 	while True: #main loop
@@ -70,9 +71,10 @@ def main():
 			users = ermrest.get_data(8,"users")[0]
 			#checks if user is logged in AND if the user is still in the area.
 			if (is_user(ermrest)):
+				user = ermrest.get_data(7,"session_info")[0]['user']
 				if (logged_in == False):
-					print("User log in at: "+time.asctime(time.localtime(time.time()))) 
-					print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
+					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
+					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
 				
 				if (check_user_exists(ermrest)):
@@ -83,8 +85,8 @@ def main():
 					if (fail_counter >= 2):
 						ermrest.delete_data(7,"session_info")
 						ermrest.put_data(7,"session_info",empty_table)
-						print("User log out at: "+time.asctime(time.localtime(time.time())))
-						print >> logger,"User log out at: "+time.asctime(time.localtime(time.time()))
+						print("User {} log out at: ".format(user)+time.asctime(time.localtime(time.time())))
+						print >> logger,"User {} log out at: ".format(user)+time.asctime(time.localtime(time.time()))
 						logged_in = False
 						continue
 					else:
@@ -92,8 +94,8 @@ def main():
 						continue
 					timer = time.time()
 			elif (logged_in):
-				print("User log out at: "+time.asctime(time.localtime(time.time())))
-				print >> logger,"User log out at: "+time.asctime(time.localtime(time.time()))
+				print("User {} log out at: ".format(user)+time.asctime(time.localtime(time.time())))
+				print >> logger,"User {} log out at: ".format(user)+time.asctime(time.localtime(time.time()))
 				logged_in = False
 						
 
