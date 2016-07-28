@@ -40,7 +40,10 @@ def check_user_exists(ermrest):
 		device_names.append(bluetooth.lookup_name(device))
 
 	current_user = ermrest.get_data(7,"session_info")[0]['user']	
-	user_info = ermrest.get_data(8,"users","/username="+current_user)[0]
+	try:
+		user_info = ermrest.get_data(8,"users","/username="+current_user)[0]
+	except:
+		user_info = {'phone_identification':"Empty_id_slot"} #A string because lookup_name can return None
 	phone = user_info['phone_identification']
 
 	if phone in devices or phone in device_names:
