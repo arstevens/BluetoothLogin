@@ -62,7 +62,7 @@ def main():
 	reset_timer = time.time()
 	bootup_run = True
 	logged_in = False 
-	user = ""
+	user = "None"
 	run_interval = 8
 
 	while True: #main loop
@@ -103,8 +103,8 @@ def main():
 			nearest_phone = phone_retriever.get_nearest_phone()
 
 			if(action(nearest_phone,ermrest)):
-				print("User log in at: "+time.asctime(time.localtime(time.time()))) 
-				print >> logger, "User log in at: "+time.asctime(time.localtime(time.time()))
+				print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
+				print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 				logged_in = True
 				try:
 					ermrest.delete_data(7,"step_completed")
