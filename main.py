@@ -80,6 +80,7 @@ def main():
 						ermrest.put_data(7,"session_info",empty_table)
 						print("User log out at: "+time.asctime(time.localtime(time.time())))
 						print >> logger,"User log out at: "+time.asctime(time.localtime(time.time()))
+						logged_in = False
 						continue
 					else:
 						fail_counter += 1
