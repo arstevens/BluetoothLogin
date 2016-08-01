@@ -20,8 +20,8 @@ def action(phone,ermrest):
 
 	#checks to see if a user logged in through voice while Phone_retriever was running
 	data = ermrest.get_data(7,"session_info")
-	if (data):
-		if (data[0]['user'] != None):
+	if (data != []):
+		if (not data[0]['user']):
 			return False #if so returns false
 
         try:
