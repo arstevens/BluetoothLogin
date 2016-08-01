@@ -27,7 +27,9 @@ def action(phone,ermrest):
                 new_data = {"user":username,"jarvis_response":None,"current_experiment_id":None}
 
                 try:
+			#erase old users data
                         ermrest.delete_data(7,"session_info")
+			ermrest.delete_data(7,"step_completed")
                 except:
                         print("No data in session info")
 
