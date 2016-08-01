@@ -113,7 +113,7 @@ def main():
 
 			if (voice_login == False):
 				nearest_phone = phone_retriever.get_nearest_phone()
-				if(action(nearest_phone,ermrest)): #if user is successfully logged in
+				if(action(nearest_phone,ermrest) and voice_login == False): #if user is successfully logged in
 					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
