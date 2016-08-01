@@ -19,11 +19,6 @@ def action(phone,ermrest):
 	#attempts to log user in and start a Jarvis session
 
 	#checks to see if a user logged in through voice while Phone_retriever was running
-	data = ermrest.get_data(7,"session_info")
-	if (data != []):
-		if (not data[0]['user']):
-			return False #if so returns false
-
         try:
                 users = ermrest.get_data(8,"users")
 		for user in users:
