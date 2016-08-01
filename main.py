@@ -24,13 +24,18 @@ def action(phone,ermrest):
 				username = user['username']
 				break
 
-                data = {"user":username,"jarvis_response":None,"current_experiment_id":None}
+                new_data = {"user":username,"jarvis_response":None,"current_experiment_id":None}
+		data = ermrest.get_data(7,"session_info")
+
+		if (data['user'] != None): #check to see if user logged in while action started running
+			return False
+
                 try:
                         ermrest.delete_data(7,"session_info")
                 except:
                         print("No data in session info")
 
-                ermrest.put_data(7,"session_info",data)
+                ermrest.put_data(7,"session_info",new_data)
                 return True
                 
         except:
@@ -113,7 +118,7 @@ def main():
 
 			if (voice_login == False):
 				nearest_phone = phone_retriever.get_nearest_phone()
-				if(action(nearest_phone,ermrest) and voice_login == False): #if user is successfully logged in
+				if(action(nearest_phone,ermrest)): #if user is successfully logged in
 					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
