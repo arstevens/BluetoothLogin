@@ -25,10 +25,6 @@ def action(phone,ermrest):
 				break
 
                 new_data = {"user":username,"jarvis_response":None,"current_experiment_id":None}
-		data = ermrest.get_data(7,"session_info")
-
-		if (data['user'] == None): #check to see if user logged in while action started running
-			return False
 
                 try:
                         ermrest.delete_data(7,"session_info")
