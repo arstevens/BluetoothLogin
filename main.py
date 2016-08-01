@@ -76,7 +76,8 @@ def main():
 
 	while True: #main loop
 		if (time.time()-timer > run_interval): #checks when to run so it isn't constantly running
-			devices = bluetooth.discover_devices()
+			if (voice_login == False):
+				devices = bluetooth.discover_devices()
 			#checks if user is logged in AND if the user is still in the area.
 			if (is_user(ermrest)):
 				user = ermrest.get_data(7,"session_info")[0]['user']
@@ -123,7 +124,7 @@ def main():
 					logged_in = True
 			if (bootup_run):
 				#change the run_interval after bootup_completes
-				run_interval = 3 
+				run_interval = 5 
 				bootup_run = False
 
 		if (time.time()-reset_timer > 600): # reset some cookies so connection doesn't become invalid
