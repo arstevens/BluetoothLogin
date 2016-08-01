@@ -30,6 +30,7 @@ def action(phone,ermrest):
 
                 try:
                         ermrest.delete_data(7,"session_info")
+			ermrest.delete_data(7,"step_completed")
                 except:
                         print("No data in session info")
 
@@ -94,7 +95,7 @@ def main():
 					continue
 
 				elif (voice_login != True): #leeway for some signal drops
-					timer = time.time()
+					#doesn't reset timer so that logout is faster
 					if (fail_counter >= 2):
 						ermrest.delete_data(7,"session_info")
 						ermrest.put_data(7,"session_info",empty_table)
@@ -120,12 +121,6 @@ def main():
 					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
-					#must reset everything the past user might have left behind
-					try:
-						ermrest.delete_data(7,"step_completed")
-					except:
-						pass
-					ermrest.put_data(7,"step_completed",{"completed_step":None})
 			if (bootup_run):
 				#change the run_interval after bootup_completes
 				run_interval = 5
@@ -141,4 +136,3 @@ def main():
 if __name__ == "__main__":
 	main() 
                         
-                
