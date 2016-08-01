@@ -17,8 +17,6 @@ def is_user(ermrest):
 
 def action(phone,ermrest):
 	#attempts to log user in and start a Jarvis session
-
-	#checks to see if a user logged in through voice while Phone_retriever was running
         try:
                 users = ermrest.get_data(8,"users")
 		for user in users:
@@ -30,7 +28,6 @@ def action(phone,ermrest):
 
                 try:
                         ermrest.delete_data(7,"session_info")
-			ermrest.delete_data(7,"step_completed")
                 except:
                         print("No data in session info")
 
@@ -40,9 +37,8 @@ def action(phone,ermrest):
         except:
                 return False
 
-def check_user_exists(ermrest):
+def check_user_exists(ermrest,devices):
 	#checks if the user is still in the area
-	devices = bluetooth.discover_devices()
 	device_names = []
 	for device in devices:
 		device_names.append(bluetooth.lookup_name(device))
@@ -76,8 +72,7 @@ def main():
 
 	while True: #main loop
 		if (time.time()-timer > run_interval): #checks when to run so it isn't constantly running
-			if (voice_login == False):
-				devices = bluetooth.discover_devices()
+			devices = bluetooth.discover_devices()
 			#checks if user is logged in AND if the user is still in the area.
 			if (is_user(ermrest)):
 				user = ermrest.get_data(7,"session_info")[0]['user']
@@ -88,7 +83,7 @@ def main():
 					voice_login = True
 					continue
 				
-				if (check_user_exists(ermrest) and voice_login != True): 
+				if (check_user_exists(ermrest,devices) and voice_login != True): 
 					#must make sure that user didn't log in with voice
 					#so that the user isn't logged out because they didn't use bluetooth 
 					timer = time.time()

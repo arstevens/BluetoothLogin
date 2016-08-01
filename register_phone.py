@@ -3,7 +3,7 @@ import argparse
 import sys
 
 def parse_command_line():
-	parser = argparse.ArgumentParser(description="Registers a phone for Blutooth Login")
+	parser = argparse.ArgumentParser(description="Register a phone for Bluetooth Login")
 	parser.add_argument("phone_id",type=str,help="the identification for your phone (mac address or phone name)") 
 	parser.add_argument("username",type=str,help="The username mapped to your phone name")
 	args = parser.parse_args()
