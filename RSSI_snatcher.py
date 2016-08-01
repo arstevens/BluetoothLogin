@@ -97,7 +97,6 @@ class RSSI_snatcher(object):
 		old_filter = sock.getsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, 14)
 		
 		# perform a device inquiry on bluetooth device #0
-		# The inquiry should last 8 * 1.28 = 10.24 seconds
 		# before the inquiry is performed, bluez should flush its cache of
 		# previously discovered devices
 		flt = bluez.hci_filter_new()

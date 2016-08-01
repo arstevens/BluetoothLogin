@@ -20,7 +20,6 @@ class ErmrestHandler(object):
     	def create_catalog(self):
 		#Returns the catalog id which is needed to fetch data and
 		#store data. Also needed to create new schemas and tables.
-		#Take note of it.
        		r = requests.post("http://"+self.host+"/ermrest/catalog",cookies=self._cookie)
 
 		r.raise_for_status()
@@ -72,8 +71,7 @@ class ErmrestHandler(object):
 		r.raise_for_status()
 
     	def put_data(self, catalog_id, table_name, data):
-		#data must be in a python dict type and in the correct table format.
-		#see the README for more information.
+		#data must be python dict type and in the correct table format.
         	data = [data]
         	r = requests.put("http://"+self.host+"/ermrest/catalog/"+str(catalog_id)+"/entity/"+table_name,
                          	json=data, cookies=self._cookie)
