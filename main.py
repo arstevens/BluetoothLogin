@@ -123,7 +123,7 @@ def main():
 					logged_in = True
 			if (bootup_run):
 				#change the run_interval after bootup_completes
-				run_interval = 5
+				run_interval = 3 
 				bootup_run = False
 
 		if (time.time()-reset_timer > 600): # reset some cookies so connection doesn't become invalid
