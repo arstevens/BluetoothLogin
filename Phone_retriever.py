@@ -17,13 +17,15 @@ class Phone_retriever:
 
 	def is_valid(self,phone):
 		#checks if user is in the list of registered users
+		returnVal = False
 		valid_users = self.ermrest.get_data(8,"users")
 		phone_name = str(bluetooth.lookup_name(phone[0]))
 		
 		for usr in valid_users:
-			if (usr['phone_identification'] == phone[0] or usr['phone_identification'] == phone_name): #checks for mac address or phone name. Both are valid forms of identification
-				return True
-		return False
+			if (usr['phone_identification'] == phone[0] or usr['phone_identification'] == phone_name): #checks for mac address or phone name. 
+															#Both are valid forms of identification
+				returnVal = True
+		return returnVal		
 
 	def get_nearest_phone(self):
 		#finds the phone with the best rssi value. returns a tuple with phone_name,mac_address,rssi_value
