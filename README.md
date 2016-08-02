@@ -28,4 +28,8 @@ To set up the BluetoothLogin program for yourself you must do two things.
 
 pi-bluetooth,
 
+Python-dev,
+
+libbluetooth-dev,
+
 PyBluez
