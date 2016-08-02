@@ -7,7 +7,7 @@ This can be ported to work with other programs. All you need to do is change the
 
 ##How it works
 This program works by scanning the network for open bluetooth devices and 
-checking if the phones are registered in a ermrest database. It will choose the 
+checking if the phones are registered in a ermrest table. It will choose the 
 registered device that is the closest or has the most reliable connection and log them
 into the database where the current user for JarvisLabAssistant is held.
 
