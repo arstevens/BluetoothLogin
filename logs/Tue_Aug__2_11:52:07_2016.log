@@ -1,0 +1,30 @@
+LOG AT: Tue_Aug__2_11:52:07_2016
+ 
+current inquiry mode is 2
+writing inquiry mode...
+result: 0
+[00:1F:F3:B4:AB:4B] RSSI: [-77]
+[00:1F:F3:B4:AB:4B] RSSI: [-85]
+[90:E7:C4:3E:D1:0C] RSSI: [-38]
+[00:1F:F3:B4:AB:4B] RSSI: [-70]
+[00:1F:F3:B4:AB:4B] RSSI: [-59]
+[90:E7:C4:3E:D1:0C] RSSI: [-38]
+[90:E7:C4:3E:D1:0C] RSSI: [-40]
+[90:E7:C4:3E:D1:0C] RSSI: [-37]
+[90:E7:C4:3E:D1:0C] RSSI: [-36]
+NewPhone: ('90:E7:C4:3E:D1:0C', -38.0)
+Phone: 90:E7:C4:3E:D1:0C is registered
+current inquiry mode is 1
+[90:E7:C4:3E:D1:0C] RSSI: [-39]
+[90:E7:C4:3E:D1:0C] RSSI: [-38]
+[00:1F:F3:B4:AB:4B] RSSI: [-68]
+[00:1F:F3:B4:AB:4B] RSSI: [-63]
+[90:E7:C4:3E:D1:0C] RSSI: [-37]
+[00:1F:F3:B4:AB:4B] RSSI: [-64]
+[00:1F:F3:B4:AB:4B] RSSI: [-66]
+[00:1F:F3:B4:AB:4B] RSSI: [-69]
+NewPhone: ('00:1F:F3:B4:AB:4B', -66.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: ('aleksphone', '90:E7:C4:3E:D1:0C', -38.0)
+User NULL log in at: Tue Aug  2 11:52:51 2016
+User alex log out at: Tue Aug  2 11:54:12 2016

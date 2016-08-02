@@ -77,7 +77,7 @@ def main():
 	bootup_run = True
 	logged_in = False 
 	voice_login = False
-	user = "None"
+	user = "NULL"
 	run_interval = 8 #run_interval changes because it takes about 8 seconds after rc.local is run to complete bootup sequence of raspberry pi
 
 	while True: #main loop
