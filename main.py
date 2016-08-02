@@ -145,5 +145,6 @@ if __name__ == "__main__":
 			main() 
 		except:
 			print("[!] Signal Dropped: resetting...")
+			time.sleep(10)
 			continue
                         
