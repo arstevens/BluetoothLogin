@@ -91,11 +91,15 @@ def main():
 	voice_login = False
 	user = "NULL"
 	run_interval = 8 #run_interval changes because it takes about 8 seconds after rc.local is run to complete bootup sequence of raspberry pi
-	print("\n") #make some space beetween prompt and logs
 
 	while True: #main loop
 		if (time.time()-timer > run_interval): #checks when to run so it isn't constantly running
 			timer = time.time()
+
+			if(bootup_run): #needed because takes 8 seconds after rc.local is run to complete bootup
+				bootup_run = False
+				run_interval = 5
+				print("\n")
 
 			if (is_user(ermrest)):
 
@@ -138,10 +142,6 @@ def main():
 					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
-			if (bootup_run):
-				#change the run_interval after bootup_completes
-				run_interval = 5 
-				bootup_run = False
 
 		if (time.time()-reset_timer > 600): #reset some cookies so connection doesn't become invalid
 			phone_retriever.reset()
