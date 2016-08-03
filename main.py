@@ -18,6 +18,16 @@ def is_user(ermrest):
 
 	return returnVal
 
+def get_username(ermrest,phone_id):
+	username = None
+	users = ermrest.get_data(8,"users")
+	
+	for user in users:
+		if user['phone_identification'] == phone_id:
+			username = user['username']
+
+	return username
+
 def action(phone,ermrest):
 	#attempts to log user in and start a Jarvis session
 	returnVal = False
@@ -38,6 +48,8 @@ def action(phone,ermrest):
                 except:
                         print("No data in session info")
 
+		
+		ermrest.put_data(7,"step_completed",{"completed_step":None})
                 ermrest.put_data(7,"session_info",new_data)
                 returnVal = True
                 
@@ -54,8 +66,8 @@ def check_user_exists(ermrest,devices):
 	for device in devices:
 		device_names.append(bluetooth.lookup_name(device))
 
-	current_user = ermrest.get_data(7,"session_info")[0]['user']	
 	try:
+		current_user = ermrest.get_data(7,"session_info")[0]['user']
 		phone = ermrest.get_data(8,"users","/username="+current_user)[0]['phone_identification']
 	except:
 		phone = 'NULL' #A string because lookup_name can return None
@@ -82,11 +94,15 @@ def main():
 
 	while True: #main loop
 		if (time.time()-timer > run_interval): #checks when to run so it isn't constantly running
-			devices = bluetooth.discover_devices()
-			#checks if user is logged in 
+			timer = time.time()
+
 			if (is_user(ermrest)):
-				user = ermrest.get_data(7,"session_info")[0]['user']
+
+				if (voice_login == False):
+					devices = bluetooth.discover_devices()
+
 				if (logged_in == False): #logs log in even if user logged in through voice command not bluetooth
+					user = ermrest.get_data(7,"session_info")[0]['user']
 					print("User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
@@ -96,22 +112,17 @@ def main():
 				if (check_user_exists(ermrest,devices) and voice_login != True): 
 					#must make sure that user didn't log in with voice
 					#so that the user isn't logged out because they didn't use bluetooth 
-					timer = time.time()
 					fail_counter = 0
-					continue
 
 				elif (voice_login != True): #leeway for some signal drops
-					timer = time.time()
 					if (fail_counter >= 2):
 						ermrest.delete_data(7,"session_info")
 						ermrest.put_data(7,"session_info",empty_table)
 						print("User {} log out at: ".format(user)+time.asctime(time.localtime(time.time())))
 						print >> logger,"User {} log out at: ".format(user)+time.asctime(time.localtime(time.time()))
 						logged_in = False
-						continue
 					else:
 						fail_counter += 1
-						continue
 
 			elif (logged_in): #if no user is in session_info and logged_in is still true log out user
 				print("User {} log out at: ".format(user)+time.asctime(time.localtime(time.time())))
@@ -119,11 +130,10 @@ def main():
 				logged_in = False
 				voice_login = False
 
-			timer = time.time() #always reset timer
-
-			if (voice_login == False):
+			elif (voice_login == False):
 				nearest_phone = phone_retriever.get_nearest_phone()
 				if(action(nearest_phone,ermrest)): #if user is successfully logged in
+					user = get_username(ermrest,nearest_phone[1])
 					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
 					logged_in = True
@@ -140,11 +150,11 @@ def main():
 
 
 if __name__ == "__main__":
-	while(True):
-		try:
-			main() 
-		except:
-			print("[!] Signal Dropped: resetting...")
-			time.sleep(20)
-			continue
+#	while(True):
+#		try:
+	main() 
+#		except:
+#			print("[!] Signal Dropped: resetting...")
+#			time.sleep(20)
+#			continue
                         
