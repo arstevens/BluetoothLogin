@@ -150,11 +150,9 @@ def main():
 
 
 if __name__ == "__main__":
-#	while(True):
-#		try:
+	while(True):
+		try:
 	main() 
-#		except:
-#			print("[!] Signal Dropped: resetting...")
-#			time.sleep(20)
-#			continue
-                        
+		except:
+			print("[!] Signal Dropped: resetting...")
+			time.sleep(20)
