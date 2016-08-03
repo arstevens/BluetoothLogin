@@ -91,6 +91,7 @@ def main():
 	voice_login = False
 	user = "NULL"
 	run_interval = 8 #run_interval changes because it takes about 8 seconds after rc.local is run to complete bootup sequence of raspberry pi
+	print("\n") #make some space beetween prompt and logs
 
 	while True: #main loop
 		if (time.time()-timer > run_interval): #checks when to run so it isn't constantly running
