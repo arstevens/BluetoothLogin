@@ -1,0 +1,52 @@
+LOG AT: Thu_Aug__4_10:40:47_2016
+ 
+User alex voice log in at: Thu Aug  4 10:41:07 2016
+User alex log out at: Thu Aug  4 10:41:37 2016
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-61]
+[00:1F:F3:B4:AB:4B] RSSI: [-62]
+NewPhone: ('00:1F:F3:B4:AB:4B', -61.5)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-71]
+[00:1F:F3:B4:AB:4B] RSSI: [-62]
+[58:B0:35:81:CE:47] RSSI: [-91]
+NewPhone: ('00:1F:F3:B4:AB:4B', -66.5)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-62]
+[00:1F:F3:B4:AB:4B] RSSI: [-62]
+[00:1F:F3:B4:AB:4B] RSSI: [-60]
+NewPhone: ('00:1F:F3:B4:AB:4B', -62.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-60]
+[00:1F:F3:B4:AB:4B] RSSI: [-65]
+[04:0C:CE:EE:8B:03] RSSI: [-92]
+NewPhone: ('90:E7:C4:3E:D1:0C', -90)
+Phone: 90:E7:C4:3E:D1:0C is registered
+current inquiry mode is 1
+[90:E7:C4:3E:D1:0C] RSSI: [-57]
+[90:E7:C4:3E:D1:0C] RSSI: [-49]
+[90:E7:C4:3E:D1:0C] RSSI: [-58]
+[90:E7:C4:3E:D1:0C] RSSI: [-50]
+[90:E7:C4:3E:D1:0C] RSSI: [-49]
+NewPhone: ('00:1F:F3:B4:AB:4B', -90)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: ('aleksphone', '90:E7:C4:3E:D1:0C', -90)
+User alex log in at: Thu Aug  4 10:42:57 2016
+User alex log out at: Thu Aug  4 10:43:44 2016
+current inquiry mode is 1
+[00:1F:F3:B4:AB:4B] RSSI: [-65]
+[00:1F:F3:B4:AB:4B] RSSI: [-59]
+[00:1F:F3:B4:AB:4B] RSSI: [-65]
+[00:1F:F3:B4:AB:4B] RSSI: [-60]
+[00:1F:F3:B4:AB:4B] RSSI: [-66]
+[00:1F:F3:B4:AB:4B] RSSI: [-67]
+[00:1F:F3:B4:AB:4B] RSSI: [-61]
+NewPhone: ('00:1F:F3:B4:AB:4B', -65.0)
+Phone: 00:1F:F3:B4:AB:4B is not registered
+NearestPhone: No Devices Detected
