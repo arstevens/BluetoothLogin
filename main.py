@@ -155,7 +155,7 @@ def main():
 			elif (voice_login == False):
 				nearest_phone = phone_retriever.get_nearest_phone()
 
-				if (check_for_voice_login == False):
+				if (check_for_voice_login(ermrest,logged_in,logger) == False):
 						action(nearest_phone,ermrest) #if user is successfully logged in
 						user = get_username(ermrest,nearest_phone[1])
 						print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
