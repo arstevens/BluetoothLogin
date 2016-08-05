@@ -77,7 +77,18 @@ def check_user_exists(ermrest,devices):
 		returnVal = True
 
 	return returnVal
- 
+
+def check_for_voice_login(ermrest,logged_in):
+	voice_login = False
+
+	if (is_user(ermrest) and logged_in == False):
+		user = ermrest.get_data(7,"session_info")[0]['user']
+		print("User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
+		print >> logger, "User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))
+		voice_login = True
+	
+	return voice_login
+
 def main():
 	empty_table = {"user":None,"jarvis_response":None,"current_experiment_id":None}
 	phone_retriever = Phone_retriever()
@@ -107,10 +118,15 @@ def main():
 				if (voice_login == False): #no need to get devices if user logged in with voice
 					devices = bluetooth.discover_devices()
 
-				if (logged_in == False): #logs login even if user logged in through voice command not bluetooth
+				"""if (logged_in == False): #logs login even if user logged in through voice command not bluetooth
 					user = ermrest.get_data(7,"session_info")[0]['user']
 					print("User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 					print >> logger, "User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))
+					logged_in = True
+					voice_login = True
+					continue
+				"""
+				if (check_for_voice_login(ermrest,logged_in)):
 					logged_in = True
 					voice_login = True
 					continue
@@ -139,11 +155,12 @@ def main():
 			elif (voice_login == False):
 				nearest_phone = phone_retriever.get_nearest_phone()
 
-				if(action(nearest_phone,ermrest)): #if user is successfully logged in
-					user = get_username(ermrest,nearest_phone[1])
-					print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
-					print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
-					logged_in = True
+				if (check_for_voice_login == False):
+						action(nearest_phone,ermrest) #if user is successfully logged in
+						user = get_username(ermrest,nearest_phone[1])
+						print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
+						print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
+						logged_in = True
 
 		if (time.time()-reset_timer > 600): #reset some cookies so connection doesn't become invalid
 			phone_retriever.reset()
