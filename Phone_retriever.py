@@ -18,7 +18,7 @@ class Phone_retriever:
 	def is_valid(self,phone):
 		#checks if user is in the list of registered users
 		returnVal = False
-		valid_users = self.ermrest.get_data(8,"users")
+		valid_users = self.ermrest.get_data(7,"users")
 		phone_name = str(bluetooth.lookup_name(phone[0]))
 		
 		for usr in valid_users:
