@@ -21,7 +21,7 @@ def is_user(ermrest):
 
 def get_username(ermrest,phone_id):
 	username = None
-	users = ermrest.get_data(8,"users")
+	users = ermrest.get_data(7,"users")
 	
 	for user in users:
 		if user['phone_identification'] == phone_id:
@@ -33,7 +33,7 @@ def action(phone,ermrest):
 	#attempts to log user in and start a Jarvis session
 	returnVal = bool() 
 	username = None
-	users = ermrest.get_data(8,"users")
+	users = ermrest.get_data(7,"users")
 
 	for user in users:
 		if user['phone_identification'] in phone:
@@ -69,7 +69,7 @@ def check_user_exists(ermrest,devices):
 		device_names.append(bluetooth.lookup_name(device))
 
 	try:
-		phone = ermrest.get_data(8,"users","/username="+current_user)[0]['phone_identification']
+		phone = ermrest.get_data(7,"users","/username="+current_user)[0]['phone_identification']
 	except:
 		phone = 'NULL' #A string because lookup_name can return None
 
@@ -91,7 +91,7 @@ def main():
 	phone_retriever = Phone_retriever()
 	logger = phone_retriever.logger
 	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
-	users = ermrest.get_data(8,"users")[0]
+	users = ermrest.get_data(7,"users")[0]
 	fail_counter = 0
 	timer = time.time()
 	reset_timer = time.time()
@@ -147,7 +147,8 @@ def main():
 			elif (voice_login == False):
 				nearest_phone = phone_retriever.get_nearest_phone()
 
-				if (check_for_voice_login(ermrest,logged_in,logger) == False):
+				if (check_for_voice_login(ermrest,logged_in,logger) == False): #prevent user voice login being overloaded by bluetooth
+
 					if(action(nearest_phone,ermrest)): #if user is successfully logged in
 						user = get_username(ermrest,nearest_phone[1])
 						print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
@@ -162,9 +163,9 @@ def main():
 
 
 if __name__ == "__main__":
-	#while (True):
-	#	try:
+	while (True): #restart if a signal drop occurs
+		try:
 	main() 
-	#	except:
-	#		print("[!] Signal Dropped: resetting...")
-	#		time.sleep(20)
+		except:
+			print("[!] Signal Dropped: resetting...")
+			time.sleep(20)

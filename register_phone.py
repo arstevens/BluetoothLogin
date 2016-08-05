@@ -11,7 +11,7 @@ def parse_command_line():
 	return args
 
 def is_username_taken(ermrest,username):
-	users = ermrest.get_data(8,"users") 
+	users = ermrest.get_data(7,"users") 
 	usernames = [] 
 
 	for user in users:
@@ -22,7 +22,7 @@ def is_username_taken(ermrest,username):
 	return False
 
 def is_phone_registered(ermrest,phone):
-	users = ermrest.get_data(8,"users")
+	users = ermrest.get_data(7,"users")
 	phones = []
 
 	for user in users:
@@ -37,7 +37,7 @@ def delete(ermrest,username):
 	query = "/username="+username
 	
 	try:
-		ermrest.delete_data(8,"users",query)
+		ermrest.delete_data(7,"users",query)
 		success = True
 	except:
 		success = False
@@ -63,13 +63,13 @@ def register():
 		sys.exit(0)
 
 	elif (is_phone_registered(ermrest,args.phone_id)):
-		taken_username = str(ermrest.get_data(8,"users","/phone_identification="+args.phone_id)[0]['username'])
+		taken_username = str(ermrest.get_data(7,"users","/phone_identification="+args.phone_id)[0]['username'])
 		print("Phone '{}' is already registered under the username '{}'".format(args.phone_id,taken_username))
 		sys.exit(0)
 
 	new_user_data = {"username":args.username,"phone_identification":args.phone_id}
 	try:
-		ermrest.put_data(8,"users",new_user_data)
+		ermrest.put_data(7,"users",new_user_data)
 		print("[*] Success: User '{}' has been added to the registry".format(args.username))
 	except Exception as exc:
 		print("[!] Error: "+str(exc))
