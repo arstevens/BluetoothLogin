@@ -50,12 +50,12 @@ def action(phone,ermrest):
 		pass
 
 	if (username == None):
-		ermrest.put_data(7,"session_info",new_data)
 		returnVal = False
 	else:
 		ermrest.put_data(7,"step_completed",{"completed_step":None})
-		ermrest.put_data(7,"session_info",new_data)
 		returnVal = True
+
+	ermrest.put_data(7,"session_info",new_data)
 	
 	return returnVal
 
@@ -156,7 +156,7 @@ def main():
 				nearest_phone = phone_retriever.get_nearest_phone()
 
 				if (check_for_voice_login(ermrest,logged_in,logger) == False):
-						action(nearest_phone,ermrest) #if user is successfully logged in
+					if(action(nearest_phone,ermrest)): #if user is successfully logged in
 						user = get_username(ermrest,nearest_phone[1])
 						print("User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
 						print >> logger, "User {} log in at: ".format(user)+time.asctime(time.localtime(time.time()))
