@@ -78,7 +78,7 @@ def check_user_exists(ermrest,devices):
 
 	return returnVal
 
-def check_for_voice_login(ermrest,logged_in):
+def check_for_voice_login(ermrest,logged_in,logger):
 	voice_login = False
 
 	if (is_user(ermrest) and logged_in == False):
@@ -126,7 +126,7 @@ def main():
 					voice_login = True
 					continue
 				"""
-				if (check_for_voice_login(ermrest,logged_in)):
+				if (check_for_voice_login(ermrest,logged_in,logger)):
 					logged_in = True
 					voice_login = True
 					continue
