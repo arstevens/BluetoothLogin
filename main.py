@@ -115,14 +115,6 @@ def main():
 				if (voice_login == False): #no need to get devices if user logged in with voice
 					devices = bluetooth.discover_devices()
 
-				"""if (logged_in == False): #logs login even if user logged in through voice command not bluetooth
-					user = ermrest.get_data(7,"session_info")[0]['user']
-					print("User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
-					print >> logger, "User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))
-					logged_in = True
-					voice_login = True
-					continue
-				"""
 				if (check_for_voice_login(ermrest,logged_in,logger)):
 					user = ermrest.get_data(7,"session_info")[0]['user']
 					print("User {} voice log in at: ".format(user)+time.asctime(time.localtime(time.time()))) 
@@ -170,9 +162,9 @@ def main():
 
 
 if __name__ == "__main__":
-	while (True):
-		try:
-			main() 
-		except:
-			print("[!] Signal Dropped: resetting...")
-			time.sleep(20)
+	#while (True):
+	#	try:
+	main() 
+	#	except:
+	#		print("[!] Signal Dropped: resetting...")
+	#		time.sleep(20)
