@@ -7,10 +7,10 @@ from numpy import median
 
 class RSSI_snatcher(object):
 
-	def __init__(self,filename):
+	def __init__(self,logger):
 		self.RSSI_values = None	
 		self._address = None
-		self.f = filename
+		self.f = logger
 
 	def _printpacket(self,pkt):
 		for c in pkt:
