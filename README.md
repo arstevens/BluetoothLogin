@@ -24,6 +24,10 @@ First register your phone with the 'register_phone.py' script.
  - Takes Username of your chosing
  - Note: Must be unique and not in use by other user
 
+Examples:
+	python register_phone.py XX:XX:XX:XX:XX random_user_name
+	python register_phone.py 12:34:56:78:90 Joe
+
 Turn your Phones Bluetooth on and you are ready to use Bluetooth Login.
 
 ## Dependencies
