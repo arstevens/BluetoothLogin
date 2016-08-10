@@ -7,7 +7,7 @@ The file that runs on startup. Runs a loop and handles user login
 
 ## get_username(ermrest,phone_id) function
  - Takes an instance of ErmrestHandler class
- - Takes the phone identification. This can be a the Bluetooth Mac or phone name
+ - Takes phone identification. This can be the Bluetooth Mac or phone name
  - Gets the name of the user attached to the mac address
 
 ## action(phone,ermrest) function
