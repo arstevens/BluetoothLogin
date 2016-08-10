@@ -1,35 +1,31 @@
-# BluetoothLogin
+# Bluetooth Login Using Raspberry Pi 
+
 _Because your just that lazy!_
 
-##What it is
-BluetoothLogin is a tool that allows you to log into the JarvisLabAssistant Alexa skill with just your phone and a bluetooth connection. 
-This can be ported to work with other programs. All you need to do is change the action function, create your own ermrest table and update the userlist.
+## What is Bluetooth Login? 
+Bluetooth Login is a program that allows the user to log into the Alexa/Amazon Echo Jarvis skill using only
+the Bluetooth connection on your phone!
 
-##How it works
-This program works by scanning the network for open bluetooth devices and 
-checking if the phones are registered in a ermrest table. It will choose the 
-registered device that is the closest or has the most reliable connection and log them
-into the database where the current user for JarvisLabAssistant is held.
+## Installation
+1. [Set up your Raspberry Pi with Raspbian](https://www.raspberrypi.org/documentation/setup/) 
+1. Connect the Raspberry Pi to your local wifi network
+1. Plug in your Bluetooth adapter to the Raspberry Pi. (Note: if you hava a R-pi 3 skip this step)
+1. Install dependencies on Raspberry Pi
+1. Create a folder called main in the 'pi' directory (Or other user directory if you aren't using the default user)
+1. Clone this repository to the main directory 
+1. In the BluetoothLogin directory create a directory called 'logs'
+1. Run the 'set_startup_script.sh' script as root
+1. Use the 'register_phone.py' script to register users for Bluetooth Login
+1. Restart the raspberry pi and start using Bluetooth Login! 
 
-##How to use
-Set up a Raspberry Pi 3(or other rpi but you will require a bluetooth adapter) with Raspbian 
-and clone this repository to your machine. Download the dependencies below and create a logs directory.
-Set up your pi so that on launch it will run the script run_bluetooth_login.py scirpt will run.
+## Using Bluetooth Login 
+First register your phone with the 'register_phone.py' script.
+ - Takes Bluetooth mac address
+ - Takes Username of your chosing
+ - Note: Must be unique and not in use by other user
+Turn your Phones Bluetooth on and you are ready to use Bluetooth Login.
 
--Scripts:
-
-To set up the BluetoothLogin program for yourself you must do two things.
-
-	1.) Change the action function in the main.py file to carry out the action you want.
-
-	2.) Change the host address for the ErmrestHandler and create your own catalogs and tables.
-
-##Dependencies
-
-pi-bluetooth,
-
-Python-dev,
-
-libbluetooth-dev,
-
-PyBluez
+## Dependencies
+ - python-dev
+ - libbluetooth-dev
+ - PyBluez
