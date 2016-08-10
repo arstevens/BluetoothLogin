@@ -35,3 +35,6 @@ Turn your Phones Bluetooth on and you are ready to use Bluetooth Login.
  - python-dev
  - libbluetooth-dev
  - PyBluez
+
+## Documentation
+ - [Developer Reference](https://github.com/arstevens/BluetoothLogin/blob/master/docs/Reference.md)
