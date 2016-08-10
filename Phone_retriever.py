@@ -65,8 +65,7 @@ class Phone_retriever:
 
 	def _init_logger(self):
 		#initiates the log file to write to.
-		#os.chdir("/home/pi/main/BluetoothLogin/logs")
-		os.chdir("logs")
+		os.chdir("/home/pi/main/BluetoothLogin/logs")
 		log_name = time.asctime(time.localtime(time.time())).replace(" ","_")+".log"
 		logger = open(log_name,"w")
 		print >> logger, "LOG AT: {}".format(time.asctime(time.localtime(time.time())).replace(" ","_"))
