@@ -88,9 +88,9 @@ def check_for_voice_login(ermrest,logged_in,logger):
 
 def main():
 	empty_table = {"user":None,"jarvis_response":None,"current_experiment_id":None}
-	phone_retriever = Phone_retriever()
+	ermrest = ErmrestHandler("ec2-54-152-177-182.compute-1.amazonaws.com","root","root") 
+	phone_retriever = Phone_retriever(ermrest)
 	logger = phone_retriever.logger
-	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root") 
 	users = ermrest.get_data(7,"users")[0]
 	fail_counter = 0
 	timer = time.time()
@@ -157,7 +157,7 @@ def main():
 
 		if (time.time()-reset_timer > 600): #reset some cookies so connection doesn't become invalid
 			phone_retriever.reset()
-			ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
+			ermrest._cookie = ermrest.get_cookie("root","root")
 			reset_timer = time.time()
 			
 

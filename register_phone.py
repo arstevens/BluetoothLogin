@@ -47,7 +47,7 @@ def delete(ermrest,username):
 
 def register():
 	args = parse_command_line()
-	ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
+	ermrest = ErmrestHandler("ec2-54-152-177-182.compute-1.amazonaws.com","root","root")
 
 	if (args.delete == 'd'): 
 		success = delete(ermrest,args.username)

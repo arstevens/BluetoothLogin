@@ -6,14 +6,14 @@ import os
 
 class Phone_retriever:
 
-	def __init__(self):
+	def __init__(self,ermrest):
 		self.completed = False
 		self.logger = self._init_logger()
-		self.ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")	
+		self.ermrest = ermrest 
 
 	def reset(self):
 		#resets ermrest so that the cookie is still valid
-		self.ermrest = ErmrestHandler("ec2-54-172-182-170.compute-1.amazonaws.com","root","root")
+		self.ermrest._cookie = self.ermrest.get_cookie("root","root")
 
 	def is_valid(self,phone):
 		#checks if user is in the list of registered users
